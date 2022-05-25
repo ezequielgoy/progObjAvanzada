@@ -4,7 +4,7 @@ import { useContext } from "react";
 function Main () {
 
     const {user} = useContext(AuthContext);
-
+    
 
 
     
@@ -17,6 +17,9 @@ function Main () {
         </Link>
         <Link to="/report">
             <button type="button" classname="report-btn">Daily Reports</button>
+        </Link>
+        <Link to="/signup">
+            <button type="button" className="signup">Create Account</button>
         </Link>
     </div>)
 }

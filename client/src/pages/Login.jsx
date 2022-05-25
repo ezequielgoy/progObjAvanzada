@@ -1,7 +1,7 @@
 import {useRef, useContext} from "react";
 import {loginCall} from "../apiCalls"
 import { AuthContext } from "../context/AuthContext";
-import {Link} from "react-router-dom"
+
 
 
 function Login(){
@@ -11,10 +11,11 @@ function Login(){
     const {user, isFetching, dispatch} = useContext(AuthContext);
 
     const handleClick = (e) =>{
-        e.preventdefault()
-        loginCall({username:username.current.value,password:password.current.value},dispatch)
+        e.preventdefault();
+        loginCall({username:username.current.value,password:password.current.value},dispatch);
     }
 
+  
 
     return (
         <div>
