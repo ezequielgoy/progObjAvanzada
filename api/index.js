@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const mongoose = require('mongoose');
 const authRoute=require('./routes/auth');
+const stockRoute=require('./routes/stock');
 
 
 //connecting to mongoDB
@@ -24,6 +25,7 @@ then(()=>console.log('DB connected'))
 app.use(express.json());
 
 app.use("/api/auth", authRoute);
+app.use("/api/stock", stockRoute);
 
 
 

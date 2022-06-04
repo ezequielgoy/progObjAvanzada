@@ -17,7 +17,7 @@ function App() {
 
   const {user} = useContext(AuthContext);
   return (
-    <div className="App">
+
     <Router>
       <Routes>
         <Route path="/" element={user ? <Main/> : <Login/>}/> 
@@ -26,7 +26,7 @@ function App() {
         <Route path="/report" element={<Report/>}/>
       </Routes>
     </Router>
-    </div>
+
   );
 }
 

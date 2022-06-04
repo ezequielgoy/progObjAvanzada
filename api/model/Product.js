@@ -17,10 +17,6 @@ const ProductSchema = new mongoose.Schema({
     critico:{
         type:Boolean,
         require: true
-    },
-    stock:{
-        type:Number,
-        require: true
     }
 
 });

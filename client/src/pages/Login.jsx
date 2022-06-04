@@ -11,7 +11,7 @@ function Login(){
     const {user, isFetching, dispatch} = useContext(AuthContext);
 
     const handleClick = (e) =>{
-        e.preventdefault();
+        e.preventDefault()
         loginCall({username:username.current.value,password:password.current.value},dispatch);
     }
 
