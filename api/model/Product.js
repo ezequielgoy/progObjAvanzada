@@ -1,22 +1,40 @@
 
-const mongoose = require('mongose');
+const mongoose = require('mongoose');
+
 
 const ProductSchema = new mongoose.Schema({
     id:{
         type:String,
         require: true,
-        min:5,
+        min:2,
         max:7,
-        unique:true
+        unique:true,
+        immutable:true
     },
     description:{
         type:String,
         require: true,
-        min:4
+        min:4,
+        immutable:true
     },
-    critico:{
+    critic:{
         type:Boolean,
-        require: true
+        require: true,
+        immutable:true
+    },
+    quantity:{
+        type:Number,
+        min:0,
+        default: 0
+    },
+    maxQuantity:{
+        type:Number,
+        default: 200,
+        immutable:true
     }
 
 });
+
+const Product = mongoose.model('Product', ProductSchema);
+
+module.exports=Product;

@@ -1,4 +1,5 @@
-const mongoose = require('mongose');
+const mongoose = require('mongoose');
+const router = require("express").Router();
 
 const WarehouseSchema = new mongoose.Schema({
     id:{
@@ -9,7 +10,9 @@ const WarehouseSchema = new mongoose.Schema({
         unique:true
     },
     products:{
-        type:Array
-    },
+        type: Array,
+    }
 
 });
+
+module.exports = router;

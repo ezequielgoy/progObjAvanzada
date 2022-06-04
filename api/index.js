@@ -7,7 +7,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const authRoute=require('./routes/auth');
 const stockRoute=require('./routes/stock');
-
+const warehouseRoute=require('./routes/warehouse');
 
 //connecting to mongoDB
 
@@ -26,7 +26,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoute);
 app.use("/api/stock", stockRoute);
-
+app.use("/api/warehouse", warehouseRoute);
 
 
 app.use(cors());

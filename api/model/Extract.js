@@ -1,4 +1,5 @@
 const mongoose = require('mongose');
+const router = require("express").Router();
 
 
 const ExtractSchema = new mongoose.Schema({
@@ -11,5 +12,6 @@ const ExtractSchema = new mongoose.Schema({
         type:String,
         require:true,
     }
-
 });
+
+module.exports = router;
