@@ -14,4 +14,6 @@ const ExtractSchema = new mongoose.Schema({
     }
 });
 
-module.exports = router;
+const Extract = mongoose.model('Extract', ExtractSchema);
+
+module.exports = Extract;
