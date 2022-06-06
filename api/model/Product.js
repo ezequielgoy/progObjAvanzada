@@ -25,12 +25,8 @@ const ProductSchema = new mongoose.Schema({
     quantity:{
         type:Number,
         min:0,
-        default: 0
-    },
-    maxQuantity:{
-        type:Number,
-        default: 200,
-        immutable:true
+        max:200,
+        default:0
     }
 
 });

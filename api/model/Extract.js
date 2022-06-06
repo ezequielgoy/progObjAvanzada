@@ -1,16 +1,18 @@
-const mongoose = require('mongose');
+const mongoose = require('mongoose');
 const router = require("express").Router();
-
+const { timeStamp } = require('console');
 
 const ExtractSchema = new mongoose.Schema({
     product:{
-        type:Object,
-        require: true,
-        min:5,
+        type:Array
     },
     lab:{
         type:String,
         require:true,
+    },
+    date:{
+        type:String,
+        default: Date.prototype.getUTCDate
     }
 });
 
