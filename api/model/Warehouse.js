@@ -10,10 +10,6 @@ const WarehouseSchema = new mongoose.Schema({
         require: true,
         unique:true
     },
-    products:{
-        type:Array,
-        default:[Product]
-    },
     warehouseReport:{
         type: Array,
         default:[Extract]

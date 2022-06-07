@@ -4,7 +4,8 @@ const { timeStamp } = require('console');
 
 const ExtractSchema = new mongoose.Schema({
     product:{
-        type:Array
+        type:String,
+        required:true
     },
     lab:{
         type:String,

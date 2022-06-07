@@ -3,16 +3,33 @@ const router = require("express").Router();
 const User = require("../model/User");
 const Product = require("../model/Product");
 const Warehouse = require("../model/Warehouse");
+const Stock = require("../model/Stock")
 
 
-
-router.put("/addProduct/:idWarehouse",async(req,res) =>{
+router.post("/addProduct/:idWarehouse",async(req,res) =>{
     try{
+        const newStock = new Stock({
+            warehouseId : req.params.idWarehouse,
+            product: req.body.product,
+            quantity: req.body.quantity
+        })
         const warehouse = await Warehouse.findOne({id: {$in: req.params.idWarehouse}})
-        const newProduct = await Product.findOne({id: {$in: req.body.id}})
-        const productInWarehouse = await Warehouse.findOne({products : {newProduct}})
+        const inStock = await Stock.findOne({product : {$in: req.body.product}})
+
+        if (await inStock.warehouse === warehouse){
+            const newQuantity = inStock.quantity + req.body.quantity;
+            inStock.updateOne({$set: {"inStock.quantity" : newQuantity}})
+            res.status(200).json(inStock)
+        }else{
+            res.status(200).save(newStock)
+        }
         
-        if (productInWarehouse === newProduct){
+
+        /* SECOND TRY
+        const productInWarehouse = await Warehouse.findOne( {products : {newProduct}},
+                                                            {'product.id$' : newProduct.id})
+        const productsInWarehouse = await warehouse.products
+        if (newProduct in productsInWarehouse){
             const newQuantity = productInWarehouse.quantity + req.body.quantity;
             warehouse.products.updateOne(
                 {},
@@ -23,10 +40,10 @@ router.put("/addProduct/:idWarehouse",async(req,res) =>{
         }else{
             newProduct.quantity = req.body.quantity;
             await warehouse.updateOne({$push: {products: newProduct}})  
-            res.status(200).json(newProduct)  
+            res.status(200).json(productsInWarehouse)  
     
-        } 
-        /*warehouse.products.array.forEach(product => {
+        }/*    FIRST TRY
+        warehouse.products.array.forEach(product => {
             if (req.body.id === product.id){
                 const newQuantity = product.quantity + req.body.quantity;
                 warehouse.products.updateOne(
@@ -39,15 +56,7 @@ router.put("/addProduct/:idWarehouse",async(req,res) =>{
                 res.status(404)
             }
         });
-        /*
-        if (await productInWarehouse === true){
-            product.quantity = productInWarehouse.quantity + req.body.quantity;    
-            await productInWarehouse.updateOne({$set: {quantity : newQuantity}})
-            res.status(200).json(product)
-        }
-        else{
-
-            }*/
+        */
 
 
                

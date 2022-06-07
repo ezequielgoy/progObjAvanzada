@@ -1,4 +1,5 @@
 import Login from "./pages/Login"
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthContext } from "./context/AuthContext";
 import Extract from "./pages/Extract"
 import ReStock from "./pages/ReStock"
