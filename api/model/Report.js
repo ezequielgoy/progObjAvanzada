@@ -1,18 +1,26 @@
-const mongoose =require("mongoose");
+const mongoose = require("mongoose");
 const router = require("express").Router();
 
 const ReportSchema = new mongoose.Schema({
     product:{
-        type:Array
+        type:Object
+    },
+    warehouse:{
+        type:Number,
+    },
+    lab:{
+        type:Number,
+    },
+    date:{
+        type:String,
     },
     usage:{
         type:String,
-        require:true
-    }
+    },
 
 })
 
 
 const Report = mongoose.model('Report', ReportSchema);
 
-modules.exports = Report;
+module.exports = Report;

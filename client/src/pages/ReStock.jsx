@@ -7,9 +7,10 @@ function ReStock() {
   const productId = useRef();
   const quantity = useRef();
   const [warehouse, setWarehouse] = useState("");
+  const [warehouseStock, setWarehouseStock] = useState([]);
   const [productsInWarehouse, setProductsInWarehouse] = useState([]);
   const [product, setProduct] = useState({});
-
+/*
   useEffect(() =>{
     const getProducts = async (newProduct) =>{
       const product ={
@@ -25,6 +26,22 @@ function ReStock() {
       }
     }
   }, [])
+*/
+
+
+useEffect(() =>{
+  const getStock = async () =>{
+    try{
+      const res = await axios.get("/stock/getProducts/"+product.warehouse)
+      setWarehouseStock(res.data)
+    }catch(err){
+      console.log(err);
+    }
+  };
+  getStock();
+}, [])
+
+
   const handleClickStock = async (e) =>{
     e.preventDefault();
     const newProduct ={
@@ -32,18 +49,21 @@ function ReStock() {
       quantity: quantity.current.value,
       warehouse: warehouse
     }
+    
     try{
-      const res = await axios.get("/stock/getProducts/"+newProduct.warehouse)
-      setProductsInWarehouse(res.data);
-      productsInWarehouse.forEach((product) =>{
-          if (product.product === newProduct.product){
-            newProduct.quantity += product.quantity;
-            setProduct(newProduct)
-            axios.put("/stock/restock/"+product.product+"/"+ newProduct.quantity)
+
+      //await getStock()
+      
+      warehouseStock.forEach((stock) =>{
+          if (stock.product === newProduct.product){
+            const newQuantity = parseInt(newProduct.quantity) + parseInt(stock.quantity);
+            newProduct.quantity = newQuantity
+            console.log(newQuantity);
+            axios.put("/stock/restock/"+warehouse+"/"+newQuantity, newProduct)
           }
       })
-
-      console.log();
+      
+      
 
     }catch(err){
       console.log(err);

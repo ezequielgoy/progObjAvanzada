@@ -1,19 +1,29 @@
+import axios from 'axios';
 import React from 'react'
 import { useRef, useContext, useState, useEffect } from "react";
 import { Form, Button, Table } from "react-bootstrap";
-function Warehouse({setWarehouse}) {
+import Product from "./Product"
+function Warehouse({warehouseId}) {
+    const [warehouseStock, setWarehouseStock] = useState([])
 
     useEffect(()=>{
-        setWarehouse(warehouse.current.value);
-    }, [form])
+        const getWarehouseStock = async() =>{
+            try{
+                const res= await axios.get("/stock/getProducts/"+warehouseId)
+                console.log(res.data);
+                setWarehouseStock(res.data)
+            }catch(err){
+                console.log(err);
+            }
+        };
+        getWarehouseStock();
+    }, [warehouseId])
     
   return (
       <div>
-            <Form.Select aria-label="warehouse" ref={warehouse} >
-                <option value="0">Warehouse One</option>
-                <option value="1">Warehouse two</option>
-                <option value="2">Warehouse three</option>
-            </Form.Select>
+                {warehouseStock.map((c) => (
+                    <Product product={c.product} quantity={c.quantity}/>
+                ))}
         </div>
   )
 }

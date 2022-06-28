@@ -23,7 +23,7 @@ router.post("/addProduct/:idWarehouse", async(req,res) =>{
 router.put("/restock/:warehouse/:newQuantity", async(req,res)=>{
     try{
         const inStock = await Stock.findOne({product : {$in: req.body.product}});
-        await inStock.updateOne({$set: {"inStock.quantity" : req.params.newQuantity}})
+        await inStock.updateOne({$set: {quantity : req.params.newQuantity}})
         res.status(200).json(inStock)
     }catch(err){
         res.status(500).json(err)
@@ -40,6 +40,17 @@ router.post("/addStock/:warehouse/:quantity/:product", async(req,res)=>{
     try{
         const savedNewStock = await newStock.save()
         res.status(200).json(savedNewStock)
+    }catch(err){
+        res.status(500).json(err)
+    }
+})
+
+// Extract Products
+router.put("/extract/:warehouse/:newQuantity", async(req,res)=>{
+    try{
+        const inStock = await Stock.findOne({product : {$in: req.body.product}});
+        await inStock.updateOne({$set: {quantity : req.params.newQuantity}})
+        res.status(200).json(inStock)
     }catch(err){
         res.status(500).json(err)
     }
