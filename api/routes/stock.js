@@ -12,7 +12,7 @@ router.post("/addProduct/:idWarehouse", async(req,res) =>{
         quantity: req.body.quantity
     })
     try{
-        const stock= await newStock.save()
+        const stock = await newStock.save()
         res.status(200).json(stock)
     }catch(err){
         res.status(500).json(err)
@@ -20,9 +20,9 @@ router.post("/addProduct/:idWarehouse", async(req,res) =>{
 });
 
 // ReStock existing products
-router.put("/restock/:warehouse/:newQuantity", async(req,res)=>{
+router.put("/restock/:warehouse/:newQuantity/:product", async(req,res)=>{
     try{
-        const inStock = await Stock.findOne({product : {$in: req.body.product}});
+        const inStock = await Stock.findOne({product : {$in: req.params.product}});
         await inStock.updateOne({$set: {quantity : req.params.newQuantity}})
         res.status(200).json(inStock)
     }catch(err){

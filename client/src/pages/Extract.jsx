@@ -21,29 +21,26 @@ function Extract() {
   const [productListValidation, setProductListValidation] = useState(Boolean);
 
 
+  const getWarehouseStock = async() =>{
+        await axios.get("/stock/getProducts/"+warehouse).then((res) =>{
+          setWarehouseStock(res.data);
+          console.log(res.data);
+        }).catch((err)=>{
+          console.log(err);
+        })
+    }
+
 
   useEffect(()=>{
-      const getWarehouseStock = async() =>{
-          try{
-              const res= await axios.get("/stock/getProducts/"+warehouse)
-              console.log(res.data);
-              setWarehouseStock(res.data)
-          }catch(err){
-              console.log(err);
-          }
-      };
       getWarehouseStock();
   }, [warehouse])
 
     //Generates report and saves it in DB for further analisis
-    const generateReport = async() =>{
-     try{
-      productList.forEach( (product) =>{
-        //const res = await axios.post("/report", product.product,product.quantity,product.warehouse);
-      })
-     }catch(err){
-      console.log(err);
-     }
+    const generateReport = async(product) =>{
+        const res = await axios.post(`/report/addReport/${product.product}/${product.quantity}/${product.warehouse}/${lab}`)
+        .catch(err);
+        console.log(res);
+ 
     }
 
   const validateStock = (product) =>{
@@ -56,7 +53,6 @@ function Extract() {
         }  
       }
     })
-    console.log(stockValidation);
     return stockValidation
     
   }
@@ -74,11 +70,11 @@ function Extract() {
 
   //update the quantity of the product in the productList PROTO
   
-  const updateQuantityProductList = async (product) =>{
+  const updateQuantityProductList = (product) =>{
     const index = productList.findIndex((p) =>{
       return p.product === product.product;
     })
-    const newQuantity =await  parseInt(product.quantity) + parseInt(productList[index].quantity);
+    const newQuantity = parseInt(product.quantity) + parseInt(productList[index].quantity);
     const indexWP = warehouseStock.findIndex((p) =>{
       return p.product === product.product;
     })
@@ -99,7 +95,6 @@ function Extract() {
 //BUTTON HANDLERS
   const handleClickAddProduct = async (e) =>{
     e.preventDefault();
-    
     const newProduct = {
       product : productId.current.value,
       quantity : quantity.current.value,
@@ -107,14 +102,13 @@ function Extract() {
     }
     
     const validation = validateStock(newProduct)
-    console.log(validation);
-    const productInList = validateNewProductInProductList(newProduct)
     if(validation){
+      const productInList = validateNewProductInProductList(newProduct)
       if(productInList){
         updateQuantityProductList(newProduct)
       }else{
-      setProductList(() => [...productList, newProduct]);
-      console.log(await productList);
+      productList.push(newProduct)
+      console.log(productList);
       }
     }else{
       console.log("Couldnt add product to the extraction list");
@@ -124,7 +118,6 @@ function Extract() {
 
 
   const handleClickExtract = (e) =>{
-
     e.preventDefault();
     productList.forEach( (product) =>{
       console.log(product.product + " " + lab.current.value + " " + product.quantity);

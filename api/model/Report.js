@@ -3,7 +3,10 @@ const router = require("express").Router();
 
 const ReportSchema = new mongoose.Schema({
     product:{
-        type:Object
+        type:Number,
+    },
+    quantity:{
+        type:Number,
     },
     warehouse:{
         type:Number,
@@ -16,6 +19,7 @@ const ReportSchema = new mongoose.Schema({
     },
     usage:{
         type:String,
+        default:""
     },
 
 })

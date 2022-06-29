@@ -14,6 +14,9 @@ const ExtractSchema = new mongoose.Schema({
     date:{
         type:String,
         default: Date.prototype.getUTCDate
+    },
+    usage:{
+        type:String
     }
 });
 
