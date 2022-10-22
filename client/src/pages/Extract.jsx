@@ -156,6 +156,12 @@ function Extract() {
                 </Form.Select>  
                 <button type="submit" value="ExtractProducts">Extract Products </button>
               </form>
+        </div>
+        <div>
+            {pendingReports.map((c)=> (
+                <ReportItem product={c.product} quantity={c.quantity} lab={c.lab} id={c._id} usageState={c.usage}/>
+            ))
+            }   
         </div>      
     </div>
   )
