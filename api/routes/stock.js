@@ -4,6 +4,7 @@ const Product = require("../model/Product");
 const Warehouse = require("../model/Warehouse");
 const Stock = require("../model/Stock");
 
+//CREATE Product
 router.post("/addProduct/:idWarehouse", async(req,res) =>{
     const newStock = new Stock({
         warehouse: req.params.idWarehouse,

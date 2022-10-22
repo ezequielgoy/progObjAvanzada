@@ -2,8 +2,7 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const cors = require('cors');
-
-
+require("dotenv").config();
 const mongoose = require('mongoose');
 const authRoute=require('./routes/auth');
 const stockRoute=require('./routes/stock');
@@ -13,8 +12,8 @@ const reportRoute=require('./routes/report')
 
 //connecting to mongoDB
 
-const uri = "mongodb+srv://Admin:XslPit5e78RxXGIC@chattest.mlt6c.mongodb.net/pooAvanzada?retryWrites=true&w=majority"
-mongoose.connect(uri, {useUnifiedTopology: true,useNewUrlParser: true}).
+
+mongoose.connect(process.env.MDBURI, {useUnifiedTopology: true,useNewUrlParser: true}).
 then(()=>console.log('DB connected'))
 .catch(err =>{
     console.log(err);

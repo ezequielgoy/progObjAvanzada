@@ -1,7 +1,7 @@
 import React from 'react'
 import {useRef, useEffect, useState} from "react";
 import { Form} from "react-bootstrap";
-
+import Warehouse from '../components/Warehouse';
 import axios from "axios";
 
 
@@ -38,7 +38,7 @@ function Extract() {
     //Generates report and saves it in DB for further analisis
     const generateReport = async(product) =>{
         const res = await axios.post(`/report/addReport/${product.product}/${product.quantity}/${product.warehouse}/${lab}`)
-        .catch(err);
+        
         console.log(res);
  
     }

@@ -21,7 +21,7 @@ function Warehouse({warehouseId}) {
     
   return (
       <div>
-                {warehouseStock.map((c) => (
+                {warehouseStock.forEach((c) => (
                     <Product product={c.product} quantity={c.quantity}/>
                 ))}
         </div>

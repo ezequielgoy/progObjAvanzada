@@ -4,7 +4,7 @@ import { Form, Button, Table } from "react-bootstrap";
 
 function Product({product,quantity}) {
 
-  const [extractQty,setExtractQty] = useState(0);
+const [extractQty,setExtractQty] = useState(0);
 
 
 

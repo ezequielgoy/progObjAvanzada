@@ -22,7 +22,6 @@ router.post("/addReport/:product/:quantity/:warehouse/:lab", async(req,res)=>{
 
 
 //UPDATE REPORT USAGE
-
 router.put("/update/:id/:usage", async(req,res)=>{
     try{
         const report = await Report.findOne({_id : {$in :req.params.id}})
@@ -35,7 +34,6 @@ router.put("/update/:id/:usage", async(req,res)=>{
 
 
 //GET REPORTS BY LAB
-
 router.get("/getByLab/:lab", async(req,res) =>{
     try{
         const report = await Report.find({
@@ -46,6 +44,7 @@ router.get("/getByLab/:lab", async(req,res) =>{
         res.status(500).json(err)
     }
 })
+
 
 //GET REPORT BY DATE
 router.get("/getByDate/", async(req,res) =>{
