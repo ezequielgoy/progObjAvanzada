@@ -22,6 +22,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={user ? <Main/> : <Login/>}/> 
+        <Route path="/main" element={<Main/>}/>
         <Route path="/extract" element={<Extract/>}/> 
         <Route path="/restock" element={<ReStock/>}/>
         <Route path="/report" element={<Report/>}/>

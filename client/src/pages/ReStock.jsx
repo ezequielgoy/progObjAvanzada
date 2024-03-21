@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import {useRef, useEffect, useState} from "react";
 import { Form, Button, Table } from "react-bootstrap";
+import BackBtn from '../components/BackBtn';
 
 function ReStock() {
   const productId = useRef();
@@ -91,7 +92,8 @@ useEffect(() =>{
               <button type="submit" value="AddProduct" className="addProduct-btn">Add Product</button>
             </form>
 
-        </div>        
+        </div>  
+        <BackBtn/>      
     </div>
   )
 }

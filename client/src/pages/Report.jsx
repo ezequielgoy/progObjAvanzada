@@ -3,6 +3,7 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import { Form} from "react-bootstrap";
 import ReportItem from "../components/ReportItem"
+import BackBtn from '../components/BackBtn';
 
 function Report() {
     const [pendingReports, setPendingReports] = useState([]);
@@ -33,6 +34,7 @@ function Report() {
         <ReportItem product={c.product} quantity={c.quantity} lab={c.lab} id={c._id} usageState={c.usage}/>
       ))
       }
+      <BackBtn/>
     </div>
   )
 }

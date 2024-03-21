@@ -2,6 +2,8 @@ import React from 'react'
 import {useRef, useEffect, useState} from "react";
 import { Form} from "react-bootstrap";
 import Warehouse from '../components/Warehouse';
+import BackBtn from '../components/BackBtn';
+
 import axios from "axios";
 
 
@@ -157,12 +159,15 @@ function Extract() {
                 <button type="submit" value="ExtractProducts">Extract Products </button>
               </form>
         </div>
-        <div>
+{/*        <div>
             {pendingReports.map((c)=> (
                 <ReportItem product={c.product} quantity={c.quantity} lab={c.lab} id={c._id} usageState={c.usage}/>
             ))
             }   
-        </div>      
+          </div>   */}
+    
+    
+    <BackBtn/>
     </div>
   )
 }
